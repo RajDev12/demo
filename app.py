@@ -22,9 +22,17 @@ def calculate(n1, n2, op):
         if n2 != 0:
             return n1 / n2
         else:
-            return "Error: Division by zero"
+            return None
 
 # Button to trigger calculation
 if st.button("Calculate"):
     result = calculate(num1, num2, operation)
-    st.success(f"Result: {result}")
+    if result is None:
+        st.error("Error: Division by zero")
+    else:
+        st.success(f"Result: {result}")
+        # Check if result is an integer and odd
+        if isinstance(result, (int, float)) and result % 2 == 1:
+            st.markdown("🎉 **It's an odd number! Celebrate!**")
+        else:
+            st.markdown("😞 **It's not odd. Better luck next time!**")
